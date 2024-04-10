@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
 
 package com.umg.programacioniiiproyectoii;
 
-/**
- *
- * @author estiven
- */
 public class ProgramacionIIIProyectoII {
 
     public static void main(String[] args) {
