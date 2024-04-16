@@ -1,12 +1,14 @@
 package com.umg.programacioniiiproyectoii.classes;
 
+import java.util.Stack;
+
 public class OrthogonalNode {
 
     private OrthogonalNode left, right, up, down;
     private int idX, idY;
-    private Vehiculo value;
+    private Vehicle value;
 
-    private OrthogonalNode(Vehiculo value, int idX, int idY) {
+    private OrthogonalNode(Vehicle value, int idX, int idY) {
         this.value = value;
         this.idX = idX;
         this.idY = idY;
@@ -58,7 +60,7 @@ public class OrthogonalNode {
         this.down = down;
     }
 
-    public Vehiculo getValue() {
+    public Vehicle getValue() {
         return this.value;
     }
 
@@ -70,6 +72,12 @@ public class OrthogonalNode {
         return idY;
     }
 
+    /**
+     * search left to right a node with the id X equals to XId
+     * 
+     * @param XId id in X of node to search
+     * @return the node with id x equal XId or null if are not found
+     */
     private OrthogonalNode getXById(int XId) {
         OrthogonalNode node = this;
 
@@ -80,9 +88,16 @@ public class OrthogonalNode {
         if (XId == node.getIdX()) {
             return node;
         }
+
         return null;
     }
 
+    /**
+     * search up to down a node with the id Y equals to YId
+     * 
+     * @param XId id in Y of node to search
+     * @return the node with id Y equal IdY or null if are not found
+     */
     private OrthogonalNode getYById(int YId) {
         OrthogonalNode node = this;
 
@@ -97,6 +112,11 @@ public class OrthogonalNode {
         return null;
     }
 
+    /**
+     * insert a node basing ourselves idx and link left and right nodes
+     * 
+     * @param node node to insert
+     */
     private void insertX(OrthogonalNode node) {
         OrthogonalNode leftNode = this, rightNode = this.getRight();
 
@@ -115,6 +135,11 @@ public class OrthogonalNode {
 
     }
 
+    /**
+     * insert a node basing ourselves idy and link up and down nodes
+     * 
+     * @param node node to insert
+     */
     private void insertY(OrthogonalNode node) {
         OrthogonalNode upNode = this, downNode = this.getDown();
 
@@ -132,6 +157,12 @@ public class OrthogonalNode {
         }
     }
 
+    /**
+     * remove the node that idX be equal to node param and update the left and right
+     * nodes
+     * 
+     * @param node node to remove
+     */
     private void removeX(OrthogonalNode node) {
         if (node.getRight() != null) {
             node.getLeft().setRight(node.getRight());
@@ -150,7 +181,14 @@ public class OrthogonalNode {
         }
     }
 
-    public void insert(Vehiculo value, int x, int y) {
+    /**
+     * Insert a new value in a especific position
+     * 
+     * @param value value to insert
+     * @param x     posion in x axis
+     * @param y     posion in y axis
+     */
+    public void insert(Vehicle value, int x, int y) {
         OrthogonalNode newNode = new OrthogonalNode(value, x, y);
 
         if (this.getYById(y) == null) {
@@ -164,6 +202,12 @@ public class OrthogonalNode {
         this.getXById(x).insertY(newNode);
     }
 
+    /**
+     * remove a value in a especific position
+     * 
+     * @param x posion in x axis
+     * @param y posion in y axis
+     */
     public void remove(int x, int y) {
         OrthogonalNode deletedNode = this.getXById(x).getYById(y);
 
@@ -179,6 +223,13 @@ public class OrthogonalNode {
 
     }
 
+    /**
+     * get a node in a specific position
+     * 
+     * @param x posion in x axis
+     * @param y posion in y axis
+     * @return
+     */
     public OrthogonalNode get(int x, int y) {
         try {
             return this.getXById(x).getYById(y);
@@ -187,65 +238,11 @@ public class OrthogonalNode {
         }
     }
 
-    public void print() {
-        OrthogonalNode y = this;
-
-        while (y != null) {
-            OrthogonalNode x = this;
-            while (x != null) {
-                if (this.get(x.getIdX(), y.getIdY()) != null) {
-                    System.out.print(this.get(x.getIdX(), y.getIdY()) + "-");
-                } else {
-                    System.out.print("------");
-                }
-                x = x.getRight();
-            }
-
-            x = this;
-            System.out.println("");
-
-            while (x != null) {
-
-                System.out.print("  |   ");
-
-                x = x.getRight();
-            }
-
-            System.out.println("");
-            y = y.getDown();
-        }
-    }
-
-
-    public void printPlate() {
-        OrthogonalNode y = this;
-
-        while (y != null) {
-            OrthogonalNode x = this;
-            while (x != null) {
-                if (this.get(x.getIdX(), y.getIdY()) != null) {
-                    System.out.print(this.get(x.getIdX(), y.getIdY()) + "-");
-                } else {
-                    System.out.print("------");
-                }
-                x = x.getRight();
-            }
-
-            x = this;
-            System.out.println("");
-
-            while (x != null) {
-
-                System.out.print("  |   ");
-
-                x = x.getRight();
-            }
-
-            System.out.println("");
-            y = y.getDown();
-        }
-    }
-
+    /**
+     * compare the value attributes with the param text
+     * @param compareText to to compare
+     * @return if the text and the value make match
+     */
     private boolean match(String compareText) {
         if (this.getValue() == null) {
             return false;
@@ -275,6 +272,32 @@ public class OrthogonalNode {
 
     }
 
+    /**
+     * search in the linkend nodes to search nodes
+     * @param search texto to search nodes
+     * @return list of node that make match
+     */
+    public OrthogonalNode[] find(String search) {
+        Stack<OrthogonalNode> nodeList = new Stack<OrthogonalNode>();
+
+        OrthogonalNode x = this;
+        OrthogonalNode y = null;
+
+        while (x != null) {
+            y = x;
+            while (y != null) {
+                if (y.match(search)) {
+                    nodeList.push(y);
+                }
+                y = y.getRight();
+            }
+
+            x = x.getDown();
+        }
+
+        return nodeList.toArray(OrthogonalNode[]::new);
+    }
+
     @Override
     public String toString() {
 
@@ -284,5 +307,72 @@ public class OrthogonalNode {
 
         return ("(" + this.idX + "," + this.idY + ")");
 
+    }
+
+    /**
+     * show a representation of Ortagonal node
+     * 
+     * @return texto to print in console
+     */
+    public String toStringR() {
+        OrthogonalNode y = this;
+        String text = "";
+
+        while (y != null) {
+            OrthogonalNode x = this;
+            while (x != null) {
+                if (this.get(x.getIdX(), y.getIdY()) != null) {
+                    text += this.get(x.getIdX(), y.getIdY()) + "-";
+                } else {
+                    text += "-------";
+                }
+                x = x.getRight();
+            }
+
+            x = this;
+            text += "\n";
+
+            while (x != null) {
+
+                text += "   |     ";
+
+                x = x.getRight();
+            }
+
+            text += "\n";
+
+            y = y.getDown();
+        }
+
+        return text;
+    }
+
+    public void printPlate() {
+        OrthogonalNode y = this;
+
+        while (y != null) {
+            OrthogonalNode x = this;
+            while (x != null) {
+                if (this.get(x.getIdX(), y.getIdY()) != null) {
+                    System.out.print(this.get(x.getIdX(), y.getIdY()) + "-");
+                } else {
+                    System.out.print("------");
+                }
+                x = x.getRight();
+            }
+
+            x = this;
+            System.out.println("");
+
+            while (x != null) {
+
+                System.out.print("  |   ");
+
+                x = x.getRight();
+            }
+
+            System.out.println("");
+            y = y.getDown();
+        }
     }
 }

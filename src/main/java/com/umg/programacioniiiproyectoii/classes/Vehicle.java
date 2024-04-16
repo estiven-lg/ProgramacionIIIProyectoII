@@ -1,18 +1,26 @@
 package com.umg.programacioniiiproyectoii.classes;
 
-public class Vehiculo {
+public class Vehicle {
 	private String plate;
 	private String color;
 	private String line;
 	private String model;
 	private String owner;
 
-	public Vehiculo(String plate, String color, String line, String model, String owner) {
+	public Vehicle(String plate, String color, String line, String model, String owner) {
 		this.plate = plate;
 		this.color = color;
 		this.line = line;
 		this.model = model;
 		this.owner = owner;
+	}
+
+	public Vehicle() {
+		this.plate = "";
+		this.color = "";
+		this.line = "";
+		this.model = "";
+		this.owner = "";
 	}
 
 	public String getPlate() {
