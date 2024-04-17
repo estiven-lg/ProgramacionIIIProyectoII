@@ -15,9 +15,6 @@ public class ProgramacionIIIProyectoII {
         int parkingNum = 0;
         int x = 1, y = 1;
 
-        vehicleList.insert(new Vehicle("m456sdd", "rojo", "2023", "jailux", "mauricio"), 3, 5);
-        vehicleList.insert(new Vehicle("m486sdd", "morado", "2023", "toyota", "marta"), 6, 3);
-        vehicleList.insert(new Vehicle("m496sdd", "azul", "2023", "bww", "Juan"), 6, 0);
 
         while (!exit) {
             System.out.println("________________________");
