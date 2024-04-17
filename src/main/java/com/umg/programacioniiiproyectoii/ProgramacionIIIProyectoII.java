@@ -15,19 +15,19 @@ public class ProgramacionIIIProyectoII {
         int parkingNum = 0;
         int x = 1, y = 1;
 
-        vehicleList.insert(new Vehicle("m456sdd", "rojo", null, "jailux", "yo"), 3, 5);
-        vehicleList.insert(new Vehicle("m486sdd", null, "2023", null, null), 6, 3);
-        vehicleList.insert(new Vehicle("m486sdd", null, "2023", null, null), 6, 9);
+        vehicleList.insert(new Vehicle("m456sdd", "rojo", "2023", "jailux", "mauricio"), 3, 5);
+        vehicleList.insert(new Vehicle("m486sdd", "morado", "2023", "toyota", "marta"), 6, 3);
+        vehicleList.insert(new Vehicle("m496sdd", "azul", "2023", "bww", "Juan"), 6, 0);
 
         while (!exit) {
             System.out.println("________________________");
             System.out.println("|que desea hacer?       |");
             System.out.println("|1. Ingresar Vehiculo   |");
-            System.out.println("|2. sacar Vehiculo      |");
+            System.out.println("|2. Sacar Vehiculo      |");
             System.out.println("|3. Buscar Vehiculos    |");
             System.out.println("|4. Ver parqueos        |");
             System.out.println("|5. Ver matriz Ortagonal|");
-            System.out.println("|________________________|");
+            System.out.println("|_______________________|");
 
             opcion = input.nextInt();
             input.nextLine();
@@ -108,12 +108,12 @@ public class ProgramacionIIIProyectoII {
                     }
                     break;
 
-                    case 4:
+                case 4:
                     System.out.println("-------------------");
-                    System.out.println(vehicleList.toStringPlates(maxNumCol,maxNumRow));
+                    System.out.println(vehicleList.toStringPlates(maxNumCol, maxNumRow));
                     System.out.println("-------------------");
                     break;
-                    case 5:
+                case 5:
                     System.out.println("-------------------");
                     System.out.println(vehicleList.toStringR());
                     System.out.println("-------------------");
