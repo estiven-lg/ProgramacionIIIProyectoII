@@ -24,7 +24,7 @@ public class ProgramacionIIIProyectoII {
             System.out.println("|que desea hacer?       |");
             System.out.println("|1. Ingresar Vehiculo   |");
             System.out.println("|2. sacar Vehiculo      |");
-            System.err.println("|3. Buscar Vehiculos    |");
+            System.out.println("|3. Buscar Vehiculos    |");
             System.out.println("|4. Ver parqueos        |");
             System.out.println("|5. Ver matriz Ortagonal|");
             System.out.println("|________________________|");
