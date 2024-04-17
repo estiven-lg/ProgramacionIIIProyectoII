@@ -240,6 +240,7 @@ public class OrthogonalNode {
 
     /**
      * compare the value attributes with the param text
+     * 
      * @param compareText to to compare
      * @return if the text and the value make match
      */
@@ -248,23 +249,23 @@ public class OrthogonalNode {
             return false;
         }
 
-        if (this.getValue().getPlate().contains(compareText)) {
+        if (this.getValue().getPlate() != null && this.getValue().getPlate().contains(compareText)) {
             return true;
         }
 
-        if (this.getValue().getOwner().contains(compareText)) {
+        if (this.getValue().getOwner() != null && this.getValue().getOwner().contains(compareText)) {
             return true;
         }
 
-        if (this.getValue().getColor().contains(compareText)) {
+        if (this.getValue().getColor() != null && this.getValue().getColor().contains(compareText)) {
             return true;
         }
 
-        if (this.getValue().getLine().contains(compareText)) {
+        if (this.getValue().getLine() != null && this.getValue().getLine().contains(compareText)) {
             return true;
         }
 
-        if (this.getValue().getModel().contains(compareText)) {
+        if (this.getValue().getModel() != null && this.getValue().getModel().contains(compareText)) {
             return true;
         }
 
@@ -274,6 +275,7 @@ public class OrthogonalNode {
 
     /**
      * search in the linkend nodes to search nodes
+     * 
      * @param search texto to search nodes
      * @return list of node that make match
      */
@@ -324,7 +326,7 @@ public class OrthogonalNode {
                 if (this.get(x.getIdX(), y.getIdY()) != null) {
                     text += this.get(x.getIdX(), y.getIdY()) + "-";
                 } else {
-                    text += "-------";
+                    text += "------";
                 }
                 x = x.getRight();
             }
@@ -334,7 +336,7 @@ public class OrthogonalNode {
 
             while (x != null) {
 
-                text += "   |     ";
+                text += "  |   ";
 
                 x = x.getRight();
             }
@@ -347,32 +349,35 @@ public class OrthogonalNode {
         return text;
     }
 
-    public void printPlate() {
-        OrthogonalNode y = this;
+    /**
+     * show a representation of state the matrix using plate
+     * 
+     * @return texto to print in console
+     */
+    public String toStringPlates(int numCol, int numRow) {
 
-        while (y != null) {
-            OrthogonalNode x = this;
-            while (x != null) {
-                if (this.get(x.getIdX(), y.getIdY()) != null) {
-                    System.out.print(this.get(x.getIdX(), y.getIdY()) + "-");
+        String text = "";
+
+        for (int x = 0; x < numCol; x++) {
+            for (int y = 0; y < numRow; y++) {
+                text += "---" + x + y + "---";
+            }
+            text += "\n";
+            for (int y = 0; y < numRow; y++) {
+
+                OrthogonalNode vehicleNode = this.get(x, y);
+                if (vehicleNode != null && vehicleNode.getValue() != null) {
+                    text += vehicleNode.getValue().getPlate() + "-";
                 } else {
-                    System.out.print("------");
+                    text += " vacio -";
                 }
-                x = x.getRight();
             }
 
-            x = this;
-            System.out.println("");
+            text += "\n";
 
-            while (x != null) {
-
-                System.out.print("  |   ");
-
-                x = x.getRight();
-            }
-
-            System.out.println("");
-            y = y.getDown();
         }
+
+        return text;
+
     }
 }

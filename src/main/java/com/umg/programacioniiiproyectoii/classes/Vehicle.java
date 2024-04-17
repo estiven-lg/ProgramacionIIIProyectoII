@@ -86,4 +86,15 @@ public class Vehicle {
 		return true;
 	}
 
+	public String toString() {
+		String text = "";
+		text += "Placa:" + this.plate + "\n";
+		text += "Color:" + (this.color != null ? this.color : "") + "\n";
+		text += "Line:" + (this.line != null ? this.line : "") + "\n";
+		text += "Model:" + (this.model != null ? this.model : "") + "\n";
+		text += "Propietario:" + (this.owner != null ? this.owner : "") + "\n";
+
+		return text;
+	}
+
 }
