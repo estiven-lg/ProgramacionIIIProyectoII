@@ -20,8 +20,8 @@ public class OrthogonalNode {
 
     public OrthogonalNode() {
         this.value = null;
-        this.idX = 0;
-        this.idY = 0;
+        this.idX = -1;
+        this.idY = -1;
         this.left = null;
         this.right = null;
         this.up = null;
@@ -192,12 +192,12 @@ public class OrthogonalNode {
         OrthogonalNode newNode = new OrthogonalNode(value, x, y);
 
         if (this.getYById(y) == null) {
-            this.insertY(new OrthogonalNode(null, 0, y));
+            this.insertY(new OrthogonalNode(null, -1, y));
         }
         this.getYById(y).insertX(newNode);
 
         if (this.getXById(x) == null) {
-            this.insertX(new OrthogonalNode(null, x, 0));
+            this.insertX(new OrthogonalNode(null, x, -1));
         }
         this.getXById(x).insertY(newNode);
     }
@@ -303,8 +303,16 @@ public class OrthogonalNode {
     @Override
     public String toString() {
 
-        if (this.idX == 0 || this.idY == 0) {
-            return ("[" + this.idX + "," + this.idY + "]");
+        if (this.idX == -1 && this.idY == -1) {
+            return ("[i,j]");
+        }
+
+        if (this.idX == -1) {
+            return ("[i," + this.idY + "]");
+        }
+
+        if (this.idY == -1) {
+            return ("[" + this.idX + ",j]");
         }
 
         return ("(" + this.idX + "," + this.idY + ")");
@@ -358,12 +366,12 @@ public class OrthogonalNode {
 
         String text = "";
 
-        for (int x = 0; x < numCol; x++) {
-            for (int y = 0; y < numRow; y++) {
-                text += "---" + x + y + "---";
+        for (int y = 0; y < numCol; y++) {
+            for (int x = 0; x < numRow; x++) {
+                text += "<<(" + y + x + ")>>";
             }
             text += "\n";
-            for (int y = 0; y < numRow; y++) {
+            for (int x = 0; x < numRow; x++) {
 
                 OrthogonalNode vehicleNode = this.get(x, y);
                 if (vehicleNode != null && vehicleNode.getValue() != null) {
