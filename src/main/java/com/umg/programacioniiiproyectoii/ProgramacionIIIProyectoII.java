@@ -27,7 +27,7 @@ public class ProgramacionIIIProyectoII {
             System.out.println("|3. Buscar Vehiculos    |");
             System.out.println("|4. Ver parqueos        |");
             System.out.println("|5. Ver matriz Ortagonal|");
-            System.out.println("|________________________|");
+            System.out.println("|_______________________|");
 
             opcion = input.nextInt();
             input.nextLine();
