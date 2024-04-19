@@ -90,7 +90,7 @@ public class ProgramacionIIIProyectoII {
                             System.out.println("Numero de parqueo no valido");
                         }
 
-                    } while (vehicleList.get(x, y) == null && parkingNum > (maxNumCol * maxNumRow));
+                    } while (vehicleList.get(x, y) == null || parkingNum > (maxNumCol * maxNumRow));
 
                     vehicleList.remove(x, y);
                     break;
